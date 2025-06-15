@@ -13,9 +13,25 @@
       this.uname = uname;
       this.weight = weight;
     }
+
+
+
     const peiqi = new Pig('佩奇', 120)
     const fian = new Pig('fian', 115)
-    console.log(fian)
+    // console.log(fian)
+
+    // 实例化对象
+    peiqi.weight = 110
+    peiqi.SayHello = () => {
+      console.log('Hello')
+    }
+    console.log(peiqi)
+
+    // 静态对象
+    Pig.age = 18
+    console.log(Pig)
+    console.log(Pig.age)
+
   </script>
 </body>
 
