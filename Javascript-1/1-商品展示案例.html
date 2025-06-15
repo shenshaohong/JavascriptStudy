@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .item>img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+</style>
+
+<body>
+  <div class="goodlist">
+    <!-- <div class="item">
+      <img src="" alt="">
+      <p class="name"></p>
+      <p class="price"></p> -->
+  </div>
+  </div>
+  <script>
+    const arr = [
+      { url: '/Demo_1/image/1.jpg', title: '周涛1', color: 'rgb(77, 33, 34)', price: '11' },
+      { url: '/Demo_1/image/2.jpg', title: '周涛2', color: 'rgb(238, 60, 123)', price: '12' },
+      { url: '/Demo_1/image/3.jpg', title: '周涛3', color: 'rgb(57, 40, 24)', price: '13' },
+      { url: '/Demo_1/image/4.jpg', title: '周涛4', color: 'rgb(181, 172, 251)', price: '14' },
+      { url: '/Demo_1/image/5.jpg', title: '周涛5', color: 'rgb(32, 80, 103)', price: '15' },
+      { url: '/Demo_1/image/6.jpg', title: '周涛6', color: 'rgb(87, 144, 174)', price: '16' },
+      { url: '/Demo_1/image/7.jpg', title: '周涛7', color: 'rgb(225, 172, 200)', price: '17' },
+      { url: '/Demo_1/image/8.jpg', title: '周涛8', color: 'rgb(87, 77, 66)', price: '18' }
+    ]
+    // 声明一个字符串
+    let str = ''
+    arr.forEach(item => {
+      // console.log(item);
+      // 解构写法
+      const { title, price, url } = item
+      str += `
+    <div class="item">
+      <img src="${url}" alt="${title}">
+      <p class="name">${title}</p>
+      <p class="price">￥${price}</p>
+      `
+    })
+    console.log(str);
+    document.querySelector('.goodlist').innerHTML = str
+  </script>
+</body>
+
+</html>
