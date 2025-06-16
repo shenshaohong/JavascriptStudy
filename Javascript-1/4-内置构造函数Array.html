@@ -23,10 +23,39 @@
       salary: 13000
     }]
 
-    let total = arr.reduce((prev, current) => {
+    const total = arr.reduce((prev, current) => {
       return prev + current.salary
     }, 0)
     console.log(total)
+
+    const ten = arr.reduce((prev, current) => {
+      return prev / 2 + current.salary * 1.2
+    }, 0)
+    console.log(ten)
+
+    console.log(
+      arr.find(item => {
+        return item.name === 'c1'
+      })
+    )
+
+    console.log(
+      arr.every(item => {
+        return item.salary > 10000
+      })
+    )//true
+
+    console.log(
+      arr.every(item => {
+        return item.salary > 12000
+      })
+    )//false
+
+    console.log(
+      arr.some(item => {
+        return item.salary > 12000
+      })
+    )//true
   </script>
 </body>
 
