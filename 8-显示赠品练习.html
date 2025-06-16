@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<div class="zengping">
+
+</div>
+
+<body>
+  <script>
+    const gift = '50g的茶叶,清洗球'
+    // 拆分成数组
+    console.log(gift.split(','))
+    // 根据数组元素个数生成对应的span标签
+    const arr = gift.split(',').map(item => {
+      return `<span>【赠品】${item}</span><br>`
+    }).join('')
+    // 数组形式不可以直接加到网页，所以join一下
+
+    const zengping = document.querySelector('.zengping')
+    zengping.innerHTML = arr
+  </script>
+</body>
+
+</html>
