@@ -148,6 +148,48 @@
       }
     ]
 
+    const subTotalArr = []
+
+    document.querySelector('.list').innerHTML = goodsList.map(item => {
+      // console.log(item)
+      //对象结构
+      const { picture, name, count, price, spec, gift } = item
+      const text = Object.values(spec).join('/')
+
+      //处理赠品模块：gift格式重新渲染,split生成数组
+      // console.log(typeof (gift))
+      //三目运算符判断是否为空，不为空则渲染
+      const zp = gift ? gift.split(',').map(item => {
+        return `<span class="tag">【赠品】${item}<br></span>`
+      }).join('') : ''
+
+      //计算小计模块 单价*数量
+      const subTotal = (price * count).toFixed(2)
+      subTotalArr.push(+subTotal)
+
+      //规格spec也拿出来
+      //jion()数组转换为字符串，拼接在一起
+      return `
+          <div class="item">
+      <img src="${picture}" alt="">
+      <p class="name">${name}${zp}</p>
+      <p class="spec">${text}</p>
+      <p class="price">${price.toFixed(2)}</p>
+      <p class="count">x${count}</p>
+      <p class="sub-total">${subTotal}</p>
+    </div>
+      `
+    }).join('')
+
+    console.log(subTotalArr)
+
+    const arr = subTotalArr.reduce((prev, con) => {
+      return prev + con
+    }, 0)
+    document.querySelector('.amount').innerHTML = arr.toFixed(2)
+
+
+
 
   </script>
 </body>
