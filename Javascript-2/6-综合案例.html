@@ -18,7 +18,7 @@
       position: absolute;
       box-shadow: 2px 2px 2px 2px #ccc;
       padding: 20px 20px 30px 20px;
-      background-color: #fff;
+      /* background-color: #fff; */
     }
 
     .header,
@@ -57,6 +57,11 @@
 
     // 2.给原型对象挂载 open 方法
     Model.prototype.open = function () {
+      // 4.BUG解决
+      // 先判断页面中是否存在modelBox弹框
+      const box = document.querySelector('.model')
+      // 利用逻辑中断，如果box为假则中断执行此行逻辑代码，若box为真则执行box.remove()
+      box && box.remove()
       // 注意这个函数不要用箭头函数，需要用到this
       // 把刚才创建的modelBox 显示到页面body中
       document.body.append(this.modelBox)
