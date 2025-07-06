@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 对象的原型继承
+    const Person = {
+      eye: 2,
+      head: 1
+    }
+    function Woman() {
+
+    }
+    //Woman 通过原型继承 Person
+    Woman.prototype = Person
+    //加了这一行就多了一个constructor属性
+    Woman.prototype.consructor = Woman
+    const red = new Woman()
+    console.log(red)
+    console.log(Woman.prototype)
+
+    function Man() { }
+    //Man 通过原型继承 Person
+    Man.prototype = Person
+    const green = new Man()
+    //因为写了Woman.prototype.consructor = Woman
+    //又因为Woman.prototype和Man.prototype都指向Person
+    // 所以Man.prototype.consructor也指向了Woman
+    console.log(green)
+
+    // 构造函数的原型继承
+    function People() {
+      this.eye = 2
+      this.head = 1
+    }
+    function WomanGz() { }
+
+    WomanGz.prototype = new People()
+    WomanGz.prototype.look = function () {
+      console.log('beautiful')
+    }
+    WomanGz.prototype.consructor = WomanGz
+    const redGz = new WomanGz()
+    console.log(redGz)
+
+    function ManGz() { }
+
+    ManGz.prototype = new People()
+    ManGz.prototype.look = function () {
+      console.log('handsome')
+    }
+    ManGz.prototype.consructor = ManGz
+    const greenGz = new ManGz()
+    console.log(greenGz)
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Person() {
+
+    }
+    const ldh = new Person()
+    console.log(ldh.__proto__ === Person.prototype)
+    //只要是构造函数都有原型对象
+    console.log(Person.prototype.__proto__)
+
+    console.log(Person.prototype instanceof Object)
+    console.log(ldh.__proto__ instanceof Object)
+  </script>
+</body>
+
+</html>
