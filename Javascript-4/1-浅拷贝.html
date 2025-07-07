@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {
+      age: 18,
+      name: 'czh',
+      family: {
+        mon: 'dead',
+        fa: 'bad'
+      }
+    }
+    //浅拷贝写法 {...obj}
+    // 只拷贝值
+    const o = { ...obj }
+    o.age = 24
+    console.log(o)
+    console.log(obj)
+
+    // 浅拷贝写法 Object.assgin()
+    const o1 = {}
+    Object.assign(o1, obj)
+    o1.age = 23
+    console.log(o1)
+    console.log(obj)
+
+    // 拷贝到里层就会出问题，会继续把值改变
+    const o2 = { ...obj }
+    o2.family.child = 5
+    console.log(o2)
+    console.log(obj)
+    // 说明这个方法只能浅拷贝最外层
+
+  </script>
+</body>
+
+</html>

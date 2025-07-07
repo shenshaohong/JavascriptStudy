@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const time = document.createElement('h1')
+    document.querySelector('body').append(time)
+    function getTime() {
+      time.innerHTML = `<i>${new Date().toLocaleString()}</i>`
+      // toLocaleString()
+      setTimeout(getTime, 1000)
+    }
+    getTime()
+  </script>
+</body>
+
+</html>
