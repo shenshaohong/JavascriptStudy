@@ -14,7 +14,8 @@
       name: 'czh',
       family: {
         mon: 'dead',
-        fa: 'bad'
+        fa: 'bad',
+        children: ['czh', 'czy', 'czf', 'czw']
       }
     }
     const o = {}
@@ -24,12 +25,15 @@
       for (let k in oldObj) {
         // 处理复杂对象的问题
         // 判断是否存在里层数组或对象
+        // 一定先写数组，后写对象
         if (oldObj[k] instanceof Array) {
           newObj[k] = []
           deepCopy(newObj[k], oldObj[k])
+
         } else if (oldObj[k] instanceof Object) {
           newObj[k] = {}
           deepCopy(newObj[k], oldObj[k])
+
         } else {
           // k 属性名 oldObj[k] 属性值
           // newObj[k] === o.uname
@@ -42,6 +46,7 @@
     deepCopy(o, obj)
     // 验证
     o.age = 20
+    o.family.children[4] = 'mm'
     console.log(o)
     console.log(obj)
   </script>
