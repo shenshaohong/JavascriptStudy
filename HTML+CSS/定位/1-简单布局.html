@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    body {
+      height: 2000px;
+    }
+
+
+    .big>div {
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+      float: left;
+      background-color: #ccc;
+      position: relative;
+    }
+
+    .big>div>div {
+      width: 80px;
+      height: 50px;
+      background-color: red;
+      text-align: center;
+      line-height: 50px;
+      border: 1px solid #fff;
+
+    }
+
+    /* static 静态定位(默认) */
+    .static {
+      position: static;
+    }
+
+    /* relative 相对定位 */
+    /* 相对于原来的位置（自身）来移动 */
+    .relative {
+      position: relative;
+      top: 20px;
+      left: 20px;
+      /* 原来的位置会保持，别人无法占据它的位置 */
+    }
+
+    /* absolute 绝对定位 */
+    .absolute {
+      position: absolute;
+      /* 绝对居中算法先50%，再减去本身盒子大小的一半 */
+      top: 50%;
+      margin-top: -25px;
+      left: 50%;
+      margin-left: -40px;
+      background-color: #fff;
+      /* 相对于父元素的位置移动 */
+      /* 没有父元素、**父元素没有定位(相对、绝对、固定)**，则以浏览器为父元素定位 */
+      /* 不占据原来的位置，飘在上一层 */
+      /* 结构多用："子绝父相"，即(子元素-绝对定位)(父元素-相对定位) */
+    }
+
+    /* fixed 固定定位 */
+    .fixed {
+      position: fixed;
+      /* 以浏览器的可视窗口为参照点移动元素 
+      (缩小放大浏览器位置也会变)*/
+      /* 不随滚动条滚动，跟父元素没关系，不占原先位置 */
+      left: 50%;
+      top: 300px;
+      /* 可以利用边距再移动距离，根据版心移动 */
+      margin-left: 200px;
+      /* 可以看作一种特殊的绝对定位 */
+      /* 多用于固定于可视区域的侧边导航栏、底部广告等等 */
+      /* 移动距离以盒子的左边界线为准 */
+    }
+
+    /* 粘性定位 */
+    .sticky {
+      position: sticky;
+      /* 相对定位和固定定位的混合 */
+      /* 1.以浏览器的可视窗口为参照点移动元素
+      2.占有原有位置
+      3.必须添加top/left/right/bottom才生效 */
+      /* 多用于一开始跟着页面滚动、后固定于页面的导航栏 */
+      left: 100px;
+      top: 100px;
+    }
+
+    .center {
+      background-color: pink;
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      position: relative;
+      top: 150px;
+      /* 叠放顺序 z-index:1*/
+      /* 数值越大盒子越靠上 */
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="big">
+    <div>
+      <div class="static">static</div>
+      <div>other</div>
+    </div>
+    <div>
+      <div class="relative">relative</div>
+      <div>other</div>
+    </div>
+    <div>
+      <div class="absolute">absolute</div>
+      <div>other</div>
+    </div>
+    <div>
+      <div class="fixed">fixed</div>
+      <div>other</div>
+    </div>
+    <div>
+      <div class="sticky">sticky</div>
+      <div>other</div>
+    </div>
+  </div>
+  <div class="center"></div>
+</body>
+
+</html>
