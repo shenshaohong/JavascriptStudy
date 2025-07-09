@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {
+      name: 'czh',
+      age: 18
+    }
+    function fn(x = 0, y = 0) {
+      console.log(this)
+      console.log(x + y)
+    }
+    fn(4, 5)
+    // call(对象,x,y)的用法
+    fn.call(obj, 1, 1)
+    // apply(对象,[])的用法
+    fn.apply(obj, [1, 2])
+    const arr = [1, 2, 3, 4, 5]
+    console.log(Math.max.apply(Math, arr))
+    console.log(Math.max(...arr))
+    // bind()的用法
+    const fun = fn.bind(obj)
+    console.log(fun)
+    fun(2, 4)
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p>
+    123
+  </p>
+  <script>
+    function fn() {
+      try {
+        // 可能发生错误的代码写到try
+        const p = document.querySelector('.p')
+        p.style.color = 'red'
+        // 捕获错误catch
+      } catch (err) {
+        // 拦截错误，提示浏览器提供的信息，但是不中断程序执行
+        console.log(err.message)
+        // 中断程序方法：
+        //方法1.加一个return中断程序
+        // return
+        // 方法2.throw抛出异常并中断程序执行
+        throw new Error('选择器不存在')
+      }
+      finally {
+        // 不管程序是否正确！是否存在throw！都一定会执行的代码
+        alert('小傻瓜')
+      }
+      // 测试程序是否中断
+      console.log(11)
+
+    }
+    fn()
+
+  </script>
+</body>
+
+</html>

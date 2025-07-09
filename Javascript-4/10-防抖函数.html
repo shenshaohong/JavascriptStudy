@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="width: 100px;
+  height: 100px;background-color: #aaa;">
+    <p style="text-align: center; width: 100px;">0</p>
+  </div>
+  <script>
+    // 闭包
+
+    // 阶段1：初始化
+    //  debounce(mouseMove, 500) 执行一次
+    //  创建 timer 变量（初始为 undefined）
+    //  返回一个新函数（假设叫 debouncedFn）
+    //  这个返回的函数被绑定为 mousemove 的事件处理器
+
+    //阶段2：事件触发时
+    //每次鼠标移动：
+    //  执行的是 debouncedFn（不是直接执行 mouseMove）
+    //  debouncedFn 可以访问父作用域的 timer（闭包特性）
+    //  清除旧的定时器（如果有）
+    //  设置新的定时器
+
+    function debounce(fn, t) {
+      // timer内存不释放，不需要重新初始化
+      let timer
+      //所以真正执行的是return的函数
+      // 且timer因闭包特性内存不释放，且不存在变量污染
+      return function () {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(function () {
+          fn()
+        }, t)
+      }
+    }
+    let i = 0
+    const p = document.querySelector('p')
+    const box = document.querySelector('div')
+    function mouseMove() {
+      p.innerHTML = i++
+    }
+    box.addEventListener('mousemove', debounce(mouseMove, 500))
+  </script>
+</body>
+
+</html>

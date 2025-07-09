@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="width: 100px;
+  height: 100px;background-color: #aaa;">
+    <p style="text-align: center; width: 100px;"></p>
+  </div>
+  <script>
+    // 闭包
+    function throttle(fn, t) {
+      // timer内存不释放，不需要重新初始化
+      let timer = null
+      //所以真正执行的是return的函数
+      // 且timer因闭包特性内存不释放，且不存在变量污染
+      return function () {
+        if (!timer) {
+          // 若定时器为空，开启定时器
+          timer = setTimeout(function () {
+            fn()
+            // 不能写clearInterval(timer)，在定时器里面无法清除定时器
+            timer = null
+          }, t)
+        }
+
+      }
+    }
+    let i = 0
+    const p = document.querySelector('p')
+    const box = document.querySelector('div')
+    function mouseMove() {
+      p.innerHTML = i++
+    }
+    box.addEventListener('mousemove', throttle(mouseMove, 500))
+  </script>
+</body>
+
+</html>
