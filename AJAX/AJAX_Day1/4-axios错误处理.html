@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>注册用户</button>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // 需求：使用axios错误处理语法，拿到报错信息，弹框显示
+    const button = document.querySelector('button')
+    button.addEventListener('click', function () {
+      axios({
+        //注册过就会失败
+        url: 'http://hmajax.itheima.net/api/register',
+        // 筛选条件
+        // params:{}
+        //资源请求方法
+        method: 'POST',
+        data: {
+          username: 'czh11111',
+          password: '123456'
+        }
+      }).then(result => {
+        // 接收返回结果
+        // 成功的情况
+        console.log(result)
+        // console.log(result.data.message)
+      }).catch(error => {
+        // 失败的情况
+        console.log(error)
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      })
+    })
+  </script>
+</body>
+
+</html>
