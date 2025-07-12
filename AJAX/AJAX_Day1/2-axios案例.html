@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>输入省份、地市查看地区</title>
+</head>
+
+<body>
+  <form action="">
+    <div>
+      <span class="province">
+        <label for="province">省份</label>
+        <select name="" id="province">
+          <option value="">请选择省份</option>
+        </select>
+      </span>
+      <span class="city">
+        <label for="city">城市</label>
+        <select name="" id="city">
+          <option value="">请选择城市</option>
+        </select>
+      </span>
+    </div>
+    <div class="showArea">
+      <ul>
+
+      </ul>
+    </div>
+  </form>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const province = document.querySelector('.province select')
+    const city = document.querySelector('.city select')
+    // 获取省份
+    axios({
+      url: 'http://hmajax.itheima.net/api/province',
+    }).then((result) => {
+      const provinceList = result.data.list.map((item, index) => `<option value="${item}">${item}</option>`)
+      // console.log(cityList);
+      province.innerHTML = '<option value="">请选择省份</option>' + provinceList
+    })
+
+    province.addEventListener('change', function () {
+
+      if (!this.value) return
+      // 获取城市
+      axios({
+        url: 'http://hmajax.itheima.net/api/city',
+        params: {
+          pname: this.value
+        }
+      }).then((result) => {
+        // console.log(result);
+        const cityList = result.data.list.map((item, index) => `<option value="${item}">${item}</option>`)
+        // console.log(cityList);
+        city.innerHTML = '<option value="">请选择城市</option>' + cityList
+      })
+
+    })
+    const area = document.querySelector('.showArea ul')
+    city.addEventListener('change', function () {
+      axios({
+        url: 'http://hmajax.itheima.net/api/area',
+        params: {
+          pname: province.value,
+          cname: this.value
+        }
+      }).then((result) => {
+        // console.log(result)
+        const areaList = result.data.list.map((item, index) => `<li>${item}</li>`).join('')
+        // console.log(result.data.list)
+        // console.log(areaList)
+        area.innerHTML = areaList
+      })
+    })
+  </script>
+</body>
+
+</html>

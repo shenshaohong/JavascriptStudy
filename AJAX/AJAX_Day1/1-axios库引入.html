@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    //小心拼写错误
+    const body = document.querySelector('body')
+    axios({
+      // 首先输入数据源地址
+      url: 'http://hmajax.itheima.net/api/province',
+      // .then获取数据结果
+    }).then(result => {
+      // console.log(result)
+      // console.log(result.data.list);
+      // console.log(result.data.list.join('<br>'));
+      body.innerHTML = `<h5>${result.data.list.join('<br>')}</h5>`
+    })
+
+    axios({
+      url: 'http://hmajax.itheima.net/api/city',
+      // 查询参数
+      params: {
+        pname: '河北省'
+      }
+    }).then(result => {
+      console.log(result)
+      console.log(result.data.list);
+      const h6 = document.createElement('h6')
+      h6.innerHTML = result.data.list.join('<br>')
+      body.appendChild(h6)
+
+    }) 
+  </script>
+</body>
+
+</html>
