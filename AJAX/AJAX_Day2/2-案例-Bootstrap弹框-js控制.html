@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入bootstrap.css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- data-bs-toggle="modal" 切换 点击之后会出来一个modal弹框 -->
+  <!-- data-bs-target="css选择器" 
+   *  告诉浏览器要显示哪一个弹框
+   *  注意css选择器要写完整，像在js里面写一样-->
+  <button data-bs-toggle="modal" data-bs-target=".name-box" class="btn btn-primary">
+    显示弹框
+  </button>
+
+  <button class="btn btn-primary edit-btn">编辑姓名</button>
+  <div class="modal name-box" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">输入姓名</h5>
+          <!-- data-bs-dismiss="modal" 关闭此弹框 -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="name_">姓名：</label>
+          <input type="text" id="name_" class="username">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary save-btn">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 引入bootstrap 的js库 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 1.创建弹框对象
+    const myBox = document.querySelector('.name-box')
+    const modal = new bootstrap.Modal(myBox)
+
+    // 编辑姓名->点击->弹框显示
+    document.querySelector('.edit-btn').addEventListener('click', () => {
+      // 2.显示弹框
+      modal.show()
+      document.querySelector('.username').value = '默认姓名'
+    })
+    //保存->点击->弹框隐藏
+    document.querySelector('.save-btn').addEventListener('click', () => {
+      console.log(document.querySelector('.username').value)
+      localStorage.setItem('username', document.querySelector('.username').value)
+      // 3.隐藏弹框
+      modal.hide()
+    })
+  </script>
+</body>
+
+</html>
