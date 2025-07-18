@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p></p>
+  <script>
+    // 创建XMLHttpRequest对象
+    const xhr = new XMLHttpRequest()
+    // 配置请求方法与url
+    xhr.open('GET', 'http://hmajax.itheima.net/api/province')
+    // 配置监听函数接收返回数据
+    xhr.addEventListener('loadend', () => {
+      // 得到结果为字符串
+      // console.log(xhr.response)
+      // console.log(xhr)
+      // 转化为对象结构
+      // console.log(JSON.parse(xhr.response));
+      const provinceObj = JSON.parse(xhr.response).list
+      document.querySelector('p').innerHTML = provinceObj.join('<br>')
+
+    })
+    // 发送请求
+    xhr.send()
+
+  </script>
+</body>
+
+</html>
