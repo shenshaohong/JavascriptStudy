@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    async function getData() {
+      // 创建第一个Promise对象,并接收返回结果
+      const pObj = await axios({ url: 'http://hmajax.itheima.net/api/province' })
+      // console.log(pObj)
+      // console.log(pObj.data.list)
+      // 创建第二个Promise对象
+      const pname = pObj.data.list[0]
+      const cObj = await axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname } })
+      // console.log(cObj)
+      // console.log(cObj.data.list)
+      const cname = cObj.data.list[0]
+      const aObj = await axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname, cname } })
+      // console.log((aObj))
+
+
+    }
+    getData()
+  </script>
+
+</body>
+
+</html>

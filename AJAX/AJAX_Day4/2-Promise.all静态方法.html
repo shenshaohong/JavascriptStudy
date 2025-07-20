@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // 1.请求城市天气，得到Promise对象
+    const bjPromise = axios({ url: 'http://hmajax.itheima.net/api/weather', params: { city: '110100' }, })
+    const shPromise = axios({ url: 'http://hmajax.itheima.net/api/weather', params: { city: '310100' }, })
+    const gzPromise = axios({ url: 'http://hmajax.itheima.net/api/weather', params: { city: '440100' }, })
+    const szPromise = axios({ url: 'http://hmajax.itheima.net/api/weather', params: { city: '440300' }, })
+
+    // 2.使用Promise.all，合并多个Promise对象
+    const p = Promise.all([bjPromise, shPromise, gzPromise, szPromise])
+    p.then(result => {
+      console.log(result);
+      // 得到一个数组结果
+      const htmlStr = result.map(item => {
+        return `
+        ${item.data.data.area}----${item.data.data.weather}`
+      }).join('')
+      console.log(htmlStr)
+    })
+  </script>
+</body>
+
+</html>
