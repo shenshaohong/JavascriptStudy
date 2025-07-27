@@ -1,4 +1,4 @@
-import { checkPhone, checkCode } from '../utils/check.js'
+/* import { checkPhone, checkCode } from '../utils/check.js'
 
 document.querySelector('.btn').addEventListener('click', () => {
   const Phone = document.querySelector('[name=mobile]').value
@@ -12,4 +12,11 @@ document.querySelector('.btn').addEventListener('click', () => {
     return
   }
   console.log('登录中...')
-})
+}) */
+
+
+//css引入加载并js中
+import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.less'
+
