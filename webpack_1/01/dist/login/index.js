@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log(!1),console.log(!0)})();
+(()=>{"use strict";document.querySelector(".btn").addEventListener("click",()=>{const e=document.querySelector("[name=mobile]").value,o=document.querySelector("[name=code]").value;11===e.length?6===o.length?console.log("登录中..."):console.log("请输入6位验证码"):console.log("请输入11位手机号")})})();

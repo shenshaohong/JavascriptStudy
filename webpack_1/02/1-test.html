@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input type="text" name="mobile">
+  <input type="text" name="code">
+  <button class="btn">xxx</button>
+</body>
+<script>
+  const checkPhone = phone => phone.length === 11
+  const checkCode = code => code.length === 6
+
+
+  document.querySelector('.btn').addEventListener('click', () => {
+    const Phone = document.querySelector('[name=mobile]').value
+    const Code = document.querySelector('[name=code]').value
+    if (!checkPhone(Phone)) {
+      console.log('请输入11位手机号')
+      return
+    }
+    if (!checkCode(Code)) {
+      console.log('请输入6位验证码')
+      return
+    }
+    console.log('登录中...')
+  })
+</script>
+
+</html>
