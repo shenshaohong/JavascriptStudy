@@ -20,3 +20,13 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.less'
 
+// 加载图片
+import backgroundObj from './assets/background.png'
+import logoObj from './assets/logo.png'
+
+const logo = document.querySelector('.logo')
+logo.src = logoObj
+
+const backgroundImg = document.querySelector('.login-wrap')
+backgroundImg.style.background = `url(${backgroundObj}) no-repeat top/cover`
+

@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 这个插件使用 cssnano 优化和压缩 CSS
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { type } = require('os')
+const { Generator } = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, 'src/login/index.js'),
@@ -46,16 +48,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            }
-          },
-        ],
-
-        type: 'javascript/auto'
+        type: 'asset',
+        generator: {
+          filename: 'assets/[hash][ext][query]'
+        },
       },
     ],
   },

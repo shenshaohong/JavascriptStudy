@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    /* body {
+      background: url(background.png) no-repeat top /100%;
+    } */
+  </style>
 </head>
 
 <body>
@@ -14,6 +19,7 @@
   <button class="btn">xxx</button>
 </body>
 <script>
+  // import backgroundObj from './background.png'
   const checkPhone = phone => phone.length === 11
   const checkCode = code => code.length === 6
 
@@ -31,6 +37,9 @@
     }
     console.log('登录中...')
   })
+
+  const backgroundImg = document.querySelector('body')
+  backgroundImg.style.backgroundImage = 'url(background.png)';
 </script>
 
 </html>
