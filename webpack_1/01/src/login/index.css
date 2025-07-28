@@ -10,9 +10,10 @@ html {
   display: none;
   left: 50%;
   position: fixed;
-  top: 50px;
+  top: -30%;
   transform: translateX(-50%);
-  width: 400px
+  width: 400px;
+  z-index: 1000;
 }
 
 .show {
@@ -22,7 +23,9 @@ html {
 .login-wrap {
   background-color: #fff;
   padding: 20px;
-  width: 400px
+  width: 400px;
+  position: absolute;
+  z-index: -99;
 }
 
 .login-wrap .title {

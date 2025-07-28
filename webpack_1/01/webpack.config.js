@@ -4,10 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 这个插件使用 cssnano 优化和压缩 CSS
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// 压缩js
+const TerserPlugin = require('terser-webpack-plugin');
 const { type } = require('os')
 const { Generator } = require('webpack')
 
 module.exports = {
+  // 开发模式（development）：不压缩，保留源码格式。
+  // 生产模式（production）：自动启用压缩（使用 TerserWebpackPlugin）。
+  // mode: 'production', 
   entry: path.join(__dirname, 'src/login/index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
@@ -26,7 +31,9 @@ module.exports = {
   // 生成独立css文件
   new MiniCssExtractPlugin(),
   // 优化和压缩 CSS
-  new MiniCssExtractPlugin()
+  new CssMinimizerPlugin(),
+  // 压缩js
+  new TerserPlugin(),
   ],
   module: {
     rules: [
@@ -61,7 +68,10 @@ module.exports = {
       // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
       // `...`,
       new CssMinimizerPlugin(),
+      // 压缩js
+      new TerserPlugin()
     ],
+    minimize: true,
   },
 
 }
