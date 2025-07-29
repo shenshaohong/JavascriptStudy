@@ -6,13 +6,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // 压缩js
 const TerserPlugin = require('terser-webpack-plugin');
-const { type } = require('os')
-const { Generator } = require('webpack')
+const webpack = require('webpack');
+const { default: axios } = require('axios');
 
-module.exports = {
-  // 开发模式（development）：不压缩，保留源码格式。
+const config = {
+  // 开发模式（development）：不压缩，保留源码格式，调试友好，快速构建。
   // 生产模式（production）：自动启用压缩（使用 TerserWebpackPlugin）。
-  // mode: 'production', 
+  // mode: 'development',
   entry: path.join(__dirname, 'src/login/index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
@@ -26,21 +26,27 @@ module.exports = {
     // 模版来源
     template: path.resolve(__dirname, './public/login.html'),
     // 生成文件路径
-    filename: path.resolve(__dirname, 'dist/login/index.html')
+    filename: path.resolve(__dirname, 'dist/login/index.html'),
+    // 当此时属于生产环境，useCdn为真，与html代码中cdn中相应，在线加载相关模块
+    useCdn: process.env.NODE_ENV === 'production'
   }),
+
   // 生成独立css文件
   new MiniCssExtractPlugin(),
   // 优化和压缩 CSS
   new CssMinimizerPlugin(),
   // 压缩js
   new TerserPlugin(),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
   ],
   module: {
     rules: [
       // 让webpack识别css文件 进行加载打包
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
         // use: ['style-loader', 'css-loader']//不能与MiniCssExtractPlugin.loader混用
       },
       // webpack 将 Less 编译为 CSS 的 loader
@@ -48,7 +54,7 @@ module.exports = {
         test: /\.less$/i,
         use: [
           // compiles Less to CSS
-          MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',
         ],
@@ -73,5 +79,25 @@ module.exports = {
     ],
     minimize: true,
   },
+  // 解析
+  resolve: {
+    alias: {
+      // 别名
+      '@': path.resolve(__dirname, 'src')
+    }
+  }
 
 }
+// 如处于开发模式下，则开始调试错误模式，可查看代码出错点
+if (process.env.NODE_ENV === 'development') {
+  config.devtool = 'inline-source-map'
+}
+// 如处于生产模式下，则不打包本地的第三方模块
+if (process.env.NODE_ENV === 'production') {
+  config.externals = {
+    'axios': 'axios',
+    'bootstrap/dist/css/bootstrap.min.css': 'bootstrap'
+  }
+}
+
+module.exports = config

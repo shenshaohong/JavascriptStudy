@@ -6,11 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.less'
 
 // 加载图片
-import backgroundObj from './assets/background.png'
+// 相对路径导入
+// import backgroundObj from './assets/background_2.png'
+//绝对路径导入-别名使用
+import backgroundObj from '@/login/assets/background_2.png'
 import logoObj from './assets/logo.png'
 
 import myAxios from '../utils/request.js'
 import { myAlert } from '../utils/alert.js'
+
+//生产模式下，打印失效
+if (process.env.NODE_ENV === 'production') {
+  console.log = function () { }
+}
+console.log('开发中，生产模式下，打印失效')
 
 const logo = document.querySelector('.logo')
 logo.src = logoObj
@@ -48,4 +57,9 @@ document.querySelector('.btn').addEventListener('click', () => {
     myAlert(false, err.response.data.message)
   })
 })
+
+// console.log('更新22')
+// console.log('@')
+
+
 

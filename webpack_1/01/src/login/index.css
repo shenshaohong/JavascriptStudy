@@ -26,6 +26,8 @@ html {
   width: 400px;
   position: absolute;
   z-index: -99;
+  border-radius: 8px;
+  opacity: 0.9;
 }
 
 .login-wrap .title {

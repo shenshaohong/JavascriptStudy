@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "built": "webpack"
+    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "dev": "cross-env NODE_ENV=development webpack serve --open --mode=development"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "axios": "^1.11.0",
+    "cross-env": "^10.0.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "html-webpack-plugin": "^5.6.3",
@@ -21,7 +23,8 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "webpack": "^5.100.2",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {
     "bootstrap": "^5.3.7"
