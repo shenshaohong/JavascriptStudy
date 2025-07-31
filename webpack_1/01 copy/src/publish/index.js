@@ -1,8 +1,9 @@
-import axios from '@/utils/request.js'
-import editor from '../utils/editor.js'
-import { myAlert } from "../utils/alert.js"
-import "../utils/auth.js"
 import "./index.css"
+import "../utils/auth.js"
+
+import axios from '@/utils/request.js'
+import editor from '@/utils/editor.js'
+import { myAlert } from "@/utils/alert.js"
 import serialize from 'form-serialize'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 /**
@@ -11,6 +12,7 @@ import serialize from 'form-serialize'
  *  1.2 展示到下拉菜单中
  */
 // 1.1 获取频道列表数据
+console.log(serialize)
 async function setChannleList() {
   const res = await axios({
     url: '/v1_0/channels'
@@ -179,6 +181,9 @@ document.querySelector('.send').addEventListener('click', async e => {
     })
     console.log(res)
     myAlert(true, '修改文章成功')
+    setTimeout(() => {
+      location.href = '../content/index.html'
+    }, 1500)
   } catch (error) {
     myAlert(false, error.response.data.message)
   }

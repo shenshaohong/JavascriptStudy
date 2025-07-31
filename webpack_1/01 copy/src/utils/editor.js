@@ -1,8 +1,9 @@
 // 富文本编辑器
 // 创建编辑器函数，创建工具栏函数
-import '@wangeditor/editor/dist/css/style.css' // 引入样式
-const wangeditor = require('@wangeditor/editor')
-import { createEditor, createToolbar } from '@wangeditor/editor'
+// import '@wangeditor/editor/dist/css/style.css' // 引入样式
+// if (process.env.NODE_ENV === 'production'){}
+const wangEditor = require('@wangeditor/editor')
+const { createEditor, createToolbar } = wangEditor
 
 // 编辑器配置对象
 const editorConfig = {

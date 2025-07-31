@@ -1,21 +1,24 @@
-import { checkPhone, checkCode } from '../utils/check.js'
 
 //css引入加载并js中
 import './index.css'
-// import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.less'
 
 // 加载图片
 // 相对路径导入
 // import backgroundObj from './assets/background_2.png'
 //绝对路径导入-别名使用
+
 import backgroundObj from '@/login/assets/background_2.png'
 import logoObj from './assets/logo.png'
 
-import myAxios from '../utils/request.js'
-import { myAlert } from '../utils/alert.js'
+import { checkPhone, checkCode } from '@/utils/check.js'
+import myAxios from '@/utils/request.js'
+import { myAlert } from '@/utils/alert.js'
 
 //生产模式下，打印失效
+console.log(process.env.NODE_ENV === 'production');
+
 if (process.env.NODE_ENV === 'production') {
   console.log = function () { }
 }

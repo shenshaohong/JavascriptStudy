@@ -71,7 +71,7 @@
                 <label for="img">封面：</label>
                 <label for="img" class="place">+</label>
                 <input class="img-file" type="file" name="img" id="img" hidden>
-                <img class="rounded">
+                <img class="rounded" title="封面">
               </div>
               <div>
                 <label for="">内容：</label>
@@ -94,13 +94,11 @@
   </div>
   <% if(htmlWebpackPlugin.options.useCdn){ %>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.4/axios.min.js"></script>
-    <script src="https://unpkg.com/form-serialize@0.7.2/index.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/index.min.js"></script>
+    <script src="https://unpkg.com/form-serialize@latest/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@wangeditor/editor@5.1.23/dist/index.min.js"></script>
     <%} %>
 
       <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
-
-
 </body>
 
 </html>

@@ -7,7 +7,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // 压缩js
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
-const { default: axios } = require('axios');
 
 const config = {
   // 开发模式（development）：不压缩，保留源码格式，调试友好，快速构建。
@@ -92,13 +91,13 @@ const config = {
         },
       },
       // 富文本编辑器
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'fonts/[hash][ext][query]'
-        }
-      }
+      /*  {
+         test: /\.(woff|woff2|eot|ttf|otf)$/,
+         type: 'asset/resource',
+         generator: {
+           filename: 'fonts/[hash][ext][query]'
+         }
+       } */
     ],
   },
   // 优化和压缩 CSS
@@ -111,6 +110,23 @@ const config = {
       new TerserPlugin()
     ],
     minimize: true,
+
+    // 配置 webpack.config.js 的 splitChunks 分割功能
+    splitChunks: {
+      chunks: 'all', // 所有模块动态非动态移入的都分割分析
+      cacheGroups: { // 分隔组
+        commons: { // 抽取公共模块
+          minSize: 0, // 抽取的chunk最小大小字节
+          minChunks: 2, // 最小引用数
+          reuseExistingChunk: true, // 当前 chunk 包含已从主 bundle 中拆分出的模块，则它将被重用
+          name(module, chunks, cacheGroupKey) { // 分离出模块文件名
+            const allChunksNames = chunks.map((item) => item.name).join('~') // 模块名1~模块名2
+            return `./js/${allChunksNames}` // 输出到 dist 目录下位置
+          }
+        }
+      }
+    }
+
   },
   // 解析
   resolve: {
@@ -118,7 +134,9 @@ const config = {
       // 别名
       '@': path.resolve(__dirname, 'src')
     }
-  }
+  },
+
+
 
 }
 // 如处于开发模式下，则开始调试错误模式，可查看代码出错点
@@ -129,8 +147,12 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV === 'production') {
   config.externals = {
     'axios': 'axios',
-    'bootstrap/dist/css/bootstrap.min.css': 'bootstrap'
+    'bootstrap/dist/css/bootstrap.min.css': 'bootstrap',
+    '@wangeditor/editor': 'wangEditor',
+    'form-serialize': 'serialize',
   }
+
 }
+
 
 module.exports = config
